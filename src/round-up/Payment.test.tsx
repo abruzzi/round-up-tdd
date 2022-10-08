@@ -20,6 +20,13 @@ describe("Payment", () => {
     ).toBeInTheDocument();
   });
 
+  it('shows an option for user to round up - 2', () => {
+    render(<Payment amount={19.8} />);
+    expect(
+      screen.getByText("I'd to donate $0.2 to charity")
+    ).toBeInTheDocument();
+  })
+
   it("allows user to donate", () => {
     render(<Payment amount={19.9} />);
     const checkbox = screen.getByText("I'd to donate $0.1 to charity");
@@ -30,6 +37,7 @@ describe("Payment", () => {
   it("allows user to opt-out", () => {
     render(<Payment amount={19.9} />);
     const checkbox = screen.getByText("I'd to donate $0.1 to charity");
+
     fireEvent.click(checkbox);
     expect(screen.getByText("$20")).toBeInTheDocument();
 
