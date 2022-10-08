@@ -12,6 +12,10 @@ export const Payment = ({ amount = 0 }: { amount?: number }) => {
     }
   }, [shouldRoundUp]);
 
+  const handleChange = () => {
+    setRoundUp(shouldRoundUp => !shouldRoundUp)
+  }
+
   return (
     <div>
       <h4>Payment</h4>
@@ -20,7 +24,7 @@ export const Payment = ({ amount = 0 }: { amount?: number }) => {
         <input
           type="checkbox"
           checked={shouldRoundUp}
-          onChange={() => setRoundUp(true)}
+          onChange={handleChange}
         />
       </label>
       <button>${total}</button>

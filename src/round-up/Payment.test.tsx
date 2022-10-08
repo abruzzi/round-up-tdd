@@ -26,4 +26,14 @@ describe("Payment", () => {
     fireEvent.click(checkbox);
     expect(screen.getByText("$20")).toBeInTheDocument();
   });
+
+  it("allows user to opt-out", () => {
+    render(<Payment amount={19.9} />);
+    const checkbox = screen.getByText("I'd to donate $0.1 to charity");
+    fireEvent.click(checkbox);
+    expect(screen.getByText("$20")).toBeInTheDocument();
+
+    fireEvent.click(checkbox);
+    expect(screen.getByText("$19.9")).toBeInTheDocument();
+  });
 });
