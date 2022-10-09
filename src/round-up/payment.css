@@ -1,0 +1,27 @@
+.payment-container {
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 0.2rem;
+  padding: 0.6rem 1rem;
+  margin-block: 2rem;
+  box-shadow: 0 0 10px -5px rgba(0,0,0,0.3);
+}
+
+.donation {
+  margin-block: 1rem;
+}
+
+.donation label {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.payment-button {
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.1rem;
+  background-color: darkviolet;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}

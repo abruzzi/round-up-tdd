@@ -44,4 +44,12 @@ describe("Payment", () => {
     fireEvent.click(checkbox);
     expect(screen.getByText("$19.9")).toBeInTheDocument();
   });
+
+  it('shows thanks when user selected to donate', () => {
+    render(<Payment amount={19.9} />);
+    const checkbox = screen.getByText("I'd to donate $0.1 to charity");
+
+    fireEvent.click(checkbox);
+    expect(screen.getByText("Thanks for your donation!")).toBeInTheDocument();
+  })
 });

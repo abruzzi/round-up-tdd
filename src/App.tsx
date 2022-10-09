@@ -3,8 +3,8 @@ import {Payment} from "./round-up/Payment";
 
 function App() {
   return (
-    <div className="App">
-      <Payment amount={19.9} />
+    <div className="app">
+      <Payment amount={19.8} />
     </div>
   );
 }

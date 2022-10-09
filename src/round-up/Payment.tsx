@@ -1,36 +1,31 @@
-import { useEffect, useState } from "react";
+import {useState} from "react";
+
+import './payment.css';
+import {useRoundUp} from "./useRoundUp";
 
 export const Payment = ({ amount = 0 }: { amount?: number }) => {
-  const [shouldRoundUp, setRoundUp] = useState<boolean>(false);
-  const [total, setTotal] = useState(amount);
+  const [agreeToDonate, setAgreeToDonate] = useState<boolean>(false);
 
-  const [tip, setTip] = useState<number>(0);
-  useEffect(() => {
-    const total = Math.floor(amount + 1);
-    if (shouldRoundUp) {
-      setTotal(total);
-    } else {
-      setTotal(amount);
-    }
-    setTip(parseFloat((total - amount).toPrecision(10)))
-  }, [shouldRoundUp]);
+  const {tip, total} = useRoundUp(amount, agreeToDonate);
 
   const handleChange = () => {
-    setRoundUp(shouldRoundUp => !shouldRoundUp)
+    setAgreeToDonate(agree => !agree)
   }
 
   return (
-    <div>
-      <h4>Payment</h4>
-      <label>
-        I'd to donate ${tip} to charity
-        <input
-          type="checkbox"
-          checked={shouldRoundUp}
-          onChange={handleChange}
-        />
-      </label>
-      <button>${total}</button>
+    <div className="payment-container">
+      <h2>Payment</h2>
+      <div className="donation">
+        <label>
+          <input
+            type="checkbox"
+            checked={agreeToDonate}
+            onChange={handleChange}
+          />
+          <span>{agreeToDonate ? 'Thanks for your donation!': `I'd to donate $${tip} to charity`}</span>
+        </label>
+      </div>
+      <button className="payment-button">${total}</button>
     </div>
   );
 };
