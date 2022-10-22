@@ -1,0 +1,1 @@
+export type CountryCode = "JP" | "DK" | "AU";

@@ -7,6 +7,8 @@ function App() {
     <div className="app">
       <OrderDetails />
       <Payment amount={19.8} />
+      <Payment amount={3459} countryCode={'JP'} />
+      <Payment amount={37} countryCode={'DK'} />
     </div>
   );
 }
