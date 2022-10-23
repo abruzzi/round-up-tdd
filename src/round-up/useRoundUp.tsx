@@ -1,23 +1,26 @@
 import { useEffect, useState } from "react";
-import { CountryCode } from "./types";
-import { calculatorMap } from "./helper";
+import {RoundUpStrategy} from "./algorithms/RoundUpStrategy";
 
 export const useRoundUp = (
   amount: number,
-  agreeToDonate: boolean,
-  countryCode: CountryCode
+  strategy: RoundUpStrategy,
 ) => {
+  const [agreeToDonate, setAgreeToDonate] = useState<boolean>(false);
   const [total, setTotal] = useState<number>(amount);
   const [tip, setTip] = useState<number>(0);
 
+  const updateAgreeToDonate = () =>
+    setAgreeToDonate((agreeToDonate) => !agreeToDonate);
+
   useEffect(() => {
-    const calculator = calculatorMap[countryCode];
-    setTotal(agreeToDonate ? calculator.getRoundUp(amount) : amount);
-    setTip(calculator.getTip(amount));
-  }, [agreeToDonate, amount, countryCode]);
+    setTotal(agreeToDonate ? strategy.getRoundUp(amount) : amount);
+    setTip(strategy.getTip(amount));
+  }, [agreeToDonate, amount, strategy]);
 
   return {
     total,
     tip,
+    agreeToDonate,
+    updateAgreeToDonate
   };
 };

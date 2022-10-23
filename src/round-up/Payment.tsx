@@ -1,20 +1,13 @@
-import { useState } from "react";
-import { useRoundUp } from "./useRoundUp";
-import { formatButtonLabel, formatInputLabel } from "./helper";
-import { CountryCode } from "./types";
+import {useRoundUp} from "./useRoundUp";
+import {RoundUpStrategy} from "./algorithms/RoundUpStrategy";
 
 type PaymentProps = {
   amount: number;
-  countryCode?: CountryCode;
+  strategy: RoundUpStrategy;
 };
 
-export const Payment = ({ amount, countryCode = "AU" }: PaymentProps) => {
-  const [agreeToDonate, setAgreeToDonate] = useState<boolean>(false);
-  const { total, tip } = useRoundUp(amount, agreeToDonate, countryCode);
-
-  const handleChange = () => {
-    setAgreeToDonate((agreeToDonate) => !agreeToDonate);
-  };
+export const Payment = ({ amount, strategy }: PaymentProps) => {
+  const { total, tip, agreeToDonate, updateAgreeToDonate } = useRoundUp(amount, strategy);
 
   return (
     <div className="container">
@@ -22,12 +15,14 @@ export const Payment = ({ amount, countryCode = "AU" }: PaymentProps) => {
       <label>
         <input
           type="checkbox"
-          onChange={handleChange}
+          onChange={() => updateAgreeToDonate()}
           checked={agreeToDonate}
         />
-        <p>{formatInputLabel(agreeToDonate, tip, countryCode)}</p>
+        <p>{agreeToDonate
+          ? "Thanks for your donation."
+          : `I would like to donate ${strategy.getDollarSign()}${tip} to charity.`}</p>
       </label>
-      <button>{formatButtonLabel(countryCode, total)}</button>
+      <button>{`${strategy.getDollarSign()}${total}`}</button>
     </div>
   );
 };
