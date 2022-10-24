@@ -1,22 +1,40 @@
-import React from 'react';
-import {OrderDetails} from './order/OrderDetails';
-import {Payment} from "./round-up/Payment";
+import React from "react";
+import { OrderDetails } from "./order/OrderDetails";
+import { Payment } from "./round-up/Payment";
 
-import RoundUpStrategyDenmark from "./round-up/algorithms/RoundUpStrategyDenmark";
-import RoundUpStrategyJapan from "./round-up/algorithms/RoundUpStrategyJapan";
+import RoundUpStrategyContext from "./round-up/RoundUpStrategyContext";
+
 import RoundUpStrategyAustralia from "./round-up/algorithms/RoundUpStrategyAustralia";
+import RoundUpStrategyJapan from "./round-up/algorithms/RoundUpStrategyJapan";
+import RoundUpStrategyDenmark from "./round-up/algorithms/RoundUpStrategyDenmark";
 
 function App() {
-  const roundUpForDK = new RoundUpStrategyDenmark();
-  const roundUpForJP = new RoundUpStrategyJapan();
-  const roundUpForAU = new RoundUpStrategyAustralia();
-
   return (
     <div className="app">
       <OrderDetails />
-      <Payment amount={19.8} strategy={roundUpForAU} />
-      <Payment amount={3459} strategy={roundUpForJP} />
-      <Payment amount={37} strategy={roundUpForDK} />
+      <RoundUpStrategyContext.Provider
+        value={{
+          strategy: new RoundUpStrategyAustralia(),
+        }}
+      >
+        <Payment amount={19.8} />
+      </RoundUpStrategyContext.Provider>
+
+      <RoundUpStrategyContext.Provider
+        value={{
+          strategy: new RoundUpStrategyJapan(),
+        }}
+      >
+        <Payment amount={3459} />
+      </RoundUpStrategyContext.Provider>
+
+      <RoundUpStrategyContext.Provider
+        value={{
+          strategy: new RoundUpStrategyDenmark(),
+        }}
+      >
+        <Payment amount={37} />
+      </RoundUpStrategyContext.Provider>
     </div>
   );
 }

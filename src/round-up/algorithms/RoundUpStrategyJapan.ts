@@ -1,4 +1,4 @@
-import {roundUpToNearestHundred} from "../roundUpLogic";
+import {roundUpToNearestHundred} from "./roundUpLogic";
 import {RoundUpStrategy} from "./RoundUpStrategy";
 
 class RoundUpStrategyJapan extends RoundUpStrategy {

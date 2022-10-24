@@ -1,13 +1,28 @@
-import {useRoundUp} from "./useRoundUp";
-import {RoundUpStrategy} from "./algorithms/RoundUpStrategy";
+import { useRoundUp } from "./useRoundUp";
+import { useContext } from "react";
+import RoundUpStrategyContext from "./RoundUpStrategyContext";
+import { RoundUpStrategy } from "./algorithms/RoundUpStrategy";
 
-type PaymentProps = {
-  amount: number;
-  strategy: RoundUpStrategy;
-};
+function formatInputLabel(
+  agreeToDonate: boolean,
+  strategy: RoundUpStrategy,
+  tip: number
+) {
+  return agreeToDonate
+    ? "Thanks for your donation."
+    : `I would like to donate ${strategy.getDollarSign()}${tip} to charity.`;
+}
 
-export const Payment = ({ amount, strategy }: PaymentProps) => {
-  const { total, tip, agreeToDonate, updateAgreeToDonate } = useRoundUp(amount, strategy);
+function formatButtonLabel(strategy: RoundUpStrategy, total: number) {
+  return `${strategy.getDollarSign()}${total}`;
+}
+
+export const Payment = ({ amount }: { amount: number }) => {
+  const { strategy } = useContext(RoundUpStrategyContext);
+  const { total, tip, agreeToDonate, updateAgreeToDonate } = useRoundUp(
+    amount,
+    strategy
+  );
 
   return (
     <div className="container">
@@ -18,11 +33,9 @@ export const Payment = ({ amount, strategy }: PaymentProps) => {
           onChange={() => updateAgreeToDonate()}
           checked={agreeToDonate}
         />
-        <p>{agreeToDonate
-          ? "Thanks for your donation."
-          : `I would like to donate ${strategy.getDollarSign()}${tip} to charity.`}</p>
+        <p>{formatInputLabel(agreeToDonate, strategy, tip)}</p>
       </label>
-      <button>{`${strategy.getDollarSign()}${total}`}</button>
+      <button>{formatButtonLabel(strategy, total)}</button>
     </div>
   );
 };
