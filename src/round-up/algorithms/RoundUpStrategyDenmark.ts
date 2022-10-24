@@ -6,7 +6,7 @@ class RoundUpStrategyDenmark extends RoundUpStrategy {
     super(roundUpToNearestTen);
   }
 
-  getDollarSign(): string {
+  getCurrencySign(): string {
     return "Kr.";
   }
 }

@@ -6,7 +6,7 @@ class RoundUpStrategyAustralia extends RoundUpStrategy {
     super(roundUpToNearestInteger);
   }
 
-  getDollarSign(): string {
+  getCurrencySign(): string {
     return "$";
   }
 }

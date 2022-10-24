@@ -10,11 +10,11 @@ function formatInputLabel(
 ) {
   return agreeToDonate
     ? "Thanks for your donation."
-    : `I would like to donate ${strategy.getDollarSign()}${tip} to charity.`;
+    : `I would like to donate ${strategy.getCurrencySign()}${tip} to charity.`;
 }
 
 function formatButtonLabel(strategy: RoundUpStrategy, total: number) {
-  return `${strategy.getDollarSign()}${total}`;
+  return `${strategy.getCurrencySign()}${total}`;
 }
 
 export const Payment = ({ amount }: { amount: number }) => {

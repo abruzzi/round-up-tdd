@@ -1,6 +1,12 @@
 type Algorithm = (amount: number) => number;
 
-export abstract class RoundUpStrategy {
+interface Strategy {
+  getRoundUp: (amount: number) => number;
+  getTip: (amount: number) => number;
+  getCurrencySign: () => string;
+}
+
+export abstract class RoundUpStrategy implements Strategy {
   protected readonly algorithm: Algorithm;
 
   private formatNumber = (number: number) => parseFloat(number.toPrecision(2));
@@ -22,7 +28,7 @@ export abstract class RoundUpStrategy {
     return this.calculateTipFor(this.getRoundUp.bind(this))(amount);
   }
 
-  abstract getDollarSign (): string;
+  abstract getCurrencySign (): string;
 }
 
 

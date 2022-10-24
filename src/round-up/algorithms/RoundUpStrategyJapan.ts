@@ -6,7 +6,7 @@ class RoundUpStrategyJapan extends RoundUpStrategy {
     super(roundUpToNearestHundred);
   }
 
-  getDollarSign(): string {
+  getCurrencySign(): string {
     return "¥";
   }
 }
