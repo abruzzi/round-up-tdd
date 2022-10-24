@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CountryCode } from "./types";
-import { calculatorMap } from "./helper";
+import { getCalculateRoundUpFunc, getCalculateTipFunc } from "./helper";
 
 export const useRoundUp = (
   amount: number,
@@ -11,9 +11,11 @@ export const useRoundUp = (
   const [tip, setTip] = useState<number>(0);
 
   useEffect(() => {
-    const calculator = calculatorMap[countryCode];
-    setTotal(agreeToDonate ? calculator.getRoundUp(amount) : amount);
-    setTip(calculator.getTip(amount));
+    const calculateRoundUp = getCalculateRoundUpFunc(countryCode);
+    const calculateTip = getCalculateTipFunc(countryCode);
+
+    setTotal(agreeToDonate ? calculateRoundUp(amount) : amount);
+    setTip(calculateTip(amount));
   }, [agreeToDonate, amount, countryCode]);
 
   return {

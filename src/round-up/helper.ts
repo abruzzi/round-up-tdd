@@ -4,7 +4,6 @@ import {
   roundUpToNearestInteger,
   roundUpToNearestTen,
 } from "./roundUpLogic";
-import { Calculator } from "./Calculator";
 
 const currencyMap = {
   JP: "¥",
@@ -26,8 +25,22 @@ export const formatInputLabel = (
 export const formatButtonLabel = (countryCode: CountryCode, total: number) =>
   `${getDollarSign(countryCode)}${total}`;
 
+const formatNumber = (number: number) => parseFloat(number.toPrecision(2));
+
+const calculateTipFor =
+  (calculateRoundUpFor: (amount: number) => number) => (amount: number) => {
+    return formatNumber(calculateRoundUpFor(amount) - amount);
+  };
+
+export const getCalculateRoundUpFunc = (countryCode: CountryCode) =>
+  calculatorMap[countryCode]
+
+export const getCalculateTipFunc = (countryCode: CountryCode) =>
+  calculateTipFor(calculatorMap[countryCode])
+
 export const calculatorMap = {
-  JP: new Calculator(roundUpToNearestHundred),
-  DK: new Calculator(roundUpToNearestTen),
-  AU: new Calculator(roundUpToNearestInteger),
+  JP: roundUpToNearestHundred,
+  DK: roundUpToNearestTen,
+  AU: roundUpToNearestInteger,
 };
+
