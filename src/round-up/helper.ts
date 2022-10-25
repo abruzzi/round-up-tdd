@@ -1,46 +1,15 @@
-import { CountryCode } from "./types";
-import {
-  roundUpToNearestHundred,
-  roundUpToNearestInteger,
-  roundUpToNearestTen,
-} from "./roundUpLogic";
+import { RoundUpStrategy } from "./types";
 
-const currencyMap = {
-  JP: "¥",
-  DK: "Kr.",
-  AU: "$",
-};
-
-const getDollarSign = (countryCode: CountryCode) => currencyMap[countryCode];
-
-export const formatInputLabel = (
+export function formatInputLabel(
   agreeToDonate: boolean,
-  tip: number,
-  countryCode: CountryCode
-) =>
-  agreeToDonate
+  strategy: RoundUpStrategy,
+  tip: number
+) {
+  return agreeToDonate
     ? "Thanks for your donation."
-    : `I would like to donate ${getDollarSign(countryCode)}${tip} to charity.`;
+    : `I would like to donate ${strategy.getCurrencySign()}${tip} to charity.`;
+}
 
-export const formatButtonLabel = (countryCode: CountryCode, total: number) =>
-  `${getDollarSign(countryCode)}${total}`;
-
-const formatNumber = (number: number) => parseFloat(number.toPrecision(2));
-
-const calculateTipFor =
-  (calculateRoundUpFor: (amount: number) => number) => (amount: number) => {
-    return formatNumber(calculateRoundUpFor(amount) - amount);
-  };
-
-export const getCalculateRoundUpFunc = (countryCode: CountryCode) =>
-  calculatorMap[countryCode]
-
-export const getCalculateTipFunc = (countryCode: CountryCode) =>
-  calculateTipFor(calculatorMap[countryCode])
-
-export const calculatorMap = {
-  JP: roundUpToNearestHundred,
-  DK: roundUpToNearestTen,
-  AU: roundUpToNearestInteger,
-};
-
+export function formatButtonLabel(strategy: RoundUpStrategy, total: number) {
+  return `${strategy.getCurrencySign()}${total}`;
+}

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JavaScriptClasses</ID>
+  <OriginalElement>/Users/juntao/icodeit/ideas/round-up/src/round-up/RoundUpStrategyContext.tsx</OriginalElement>
+  <nodes>
+    <node x="234.0" y="162.0">/Users/juntao/icodeit/ideas/round-up/src/round-up/types.ts:AbstractRoundUpStrategy</node>
+    <node x="0.0" y="378.0">/Users/juntao/icodeit/ideas/round-up/src/round-up/strategy/RoundUpStrategyAustralia.tsx:RoundUpStrategyAustralia</node>
+    <node x="291.0" y="378.0">/Users/juntao/icodeit/ideas/round-up/src/round-up/strategy/RoundUpStrategyJapan.tsx:RoundUpStrategyJapan</node>
+    <node x="559.0" y="378.0">/Users/juntao/icodeit/ideas/round-up/src/round-up/strategy/RoundUpStrategyDenmark.tsx:RoundUpStrategyDenmark</node>
+    <node x="-209.0" y="-12.0">/Users/juntao/icodeit/ideas/round-up/src/round-up/RoundUpStrategyContext.tsx:RoundUpStrategyContextType</node>
+    <node x="237.0" y="-12.0">/Users/juntao/icodeit/ideas/round-up/src/round-up/types.ts:RoundUpStrategy</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="/Users/juntao/icodeit/ideas/round-up/src/round-up/RoundUpStrategyContext.tsx:RoundUpStrategyContextType" target="/Users/juntao/icodeit/ideas/round-up/src/round-up/types.ts:RoundUpStrategy" relationship="DEPENDENCY">
+      <point x="0.0" y="0.0" />
+      <point x="76.5" y="18.0" />
+      <point x="76.5" y="4.0" />
+      <point x="415.0" y="4.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="/Users/juntao/icodeit/ideas/round-up/src/round-up/strategy/RoundUpStrategyAustralia.tsx:RoundUpStrategyAustralia" target="/Users/juntao/icodeit/ideas/round-up/src/round-up/types.ts:AbstractRoundUpStrategy" relationship="GENERALIZATION">
+      <point x="0.0" y="-43.5" />
+      <point x="135.5" y="353.0" />
+      <point x="415.0" y="353.0" />
+      <point x="0.0" y="83.0" />
+    </edge>
+    <edge source="/Users/juntao/icodeit/ideas/round-up/src/round-up/strategy/RoundUpStrategyJapan.tsx:RoundUpStrategyJapan" target="/Users/juntao/icodeit/ideas/round-up/src/round-up/types.ts:AbstractRoundUpStrategy" relationship="GENERALIZATION">
+      <point x="0.0" y="-43.5" />
+      <point x="0.0" y="83.0" />
+    </edge>
+    <edge source="/Users/juntao/icodeit/ideas/round-up/src/round-up/strategy/RoundUpStrategyDenmark.tsx:RoundUpStrategyDenmark" target="/Users/juntao/icodeit/ideas/round-up/src/round-up/types.ts:AbstractRoundUpStrategy" relationship="GENERALIZATION">
+      <point x="0.0" y="-43.5" />
+      <point x="695.0" y="353.0" />
+      <point x="415.0" y="353.0" />
+      <point x="0.0" y="83.0" />
+    </edge>
+    <edge source="/Users/juntao/icodeit/ideas/round-up/src/round-up/types.ts:AbstractRoundUpStrategy" target="/Users/juntao/icodeit/ideas/round-up/src/round-up/types.ts:RoundUpStrategy" relationship="REALIZATION">
+      <point x="0.0" y="-83.0" />
+      <point x="0.0" y="56.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="true" x="311.0" y="226.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <VISIBILITY>protected</VISIBILITY>
+</Diagram>
+
