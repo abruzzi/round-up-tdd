@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="app">
       <OrderDetails />
-      <Payment amount={19.8} />
+      <Payment amount={19.8} methods={['apple']} />
     </div>
   );
 }

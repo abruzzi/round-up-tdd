@@ -50,6 +50,10 @@ describe('Payment', () => {
 
       expect(screen.getByText('Pay with apple')).toBeInTheDocument();
       expect(screen.getByText('Pay in cash')).toBeInTheDocument();
+
+      const payInCash = screen.getByLabelText('Pay in cash');
+
+      expect(payInCash).toBeChecked();
     })
   })
 })

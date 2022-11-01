@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import { useRoundUp } from "./useRoundUp";
 
+import "./payment.css";
+
 function formatMessage(agreeToDonate: boolean, tip: number) {
   return agreeToDonate
     ? "Thanks for your donation."
@@ -36,20 +38,30 @@ export const Payment = ({
   return (
     <div className="container">
       <h3>Payment</h3>
-      <ul>
+      <div className="paymentMethods">
         {paymentMethods.map((method) => (
-          <li key={method.provider}>{method.label}</li>
+          <label key={method.provider}>
+            <input
+              type="radio"
+              name="payment"
+              value={method.provider}
+              defaultChecked={method.provider === "cash"}
+            />
+            <span>{method.label}</span>
+          </label>
         ))}
-      </ul>
-      <label>
-        <input
-          type="checkbox"
-          onChange={handleChange}
-          checked={agreeToDonate}
-        />
-        <p>{formatMessage(agreeToDonate, tip)}</p>
-      </label>
-      <button>${total}</button>
+      </div>
+      <div className="donation">
+        <label>
+          <input
+            type="checkbox"
+            onChange={handleChange}
+            checked={agreeToDonate}
+          />
+          <p>{formatMessage(agreeToDonate, tip)}</p>
+        </label>
+      </div>
+      <button className="payment-button">${total}</button>
     </div>
   );
 };
