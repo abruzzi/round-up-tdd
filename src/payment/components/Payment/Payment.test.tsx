@@ -1,6 +1,8 @@
 import {fireEvent, render, screen} from "@testing-library/react";
 import {Payment} from "./Payment";
-import {PaymentStrategyAU, PaymentStrategyDK, PaymentStrategyJP} from "./useRoundUp";
+import {PaymentStrategyAU} from "../../strategies/PaymentStrategyAU";
+import {PaymentStrategyJP} from "../../strategies/PaymentStrategyJP";
+import {PaymentStrategyDK} from "../../strategies/PaymentStrategyDK";
 
 describe('Payment', () => {
   it('renders payment title', () => {

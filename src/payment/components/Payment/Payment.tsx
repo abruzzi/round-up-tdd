@@ -1,8 +1,9 @@
-import {PaymentStrategy, useRoundUp} from "./useRoundUp";
+import {useRoundUp} from "../../hooks/useRoundUp";
 
 import "./payment.css";
-import { formatButtonLabel, formatCheckboxLabel } from "./utils";
-import { PaymentMethods } from "./PaymentMethods";
+import { formatButtonLabel, formatCheckboxLabel } from "../../utils";
+import { PaymentMethods } from "../PaymentMethods/PaymentMethods";
+import {PaymentStrategy} from "../../types";
 
 export const Payment = ({
   amount,

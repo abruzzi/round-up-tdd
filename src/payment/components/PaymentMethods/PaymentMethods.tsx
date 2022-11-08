@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import {PaymentMethodType} from "./types";
+import {PaymentMethodType} from "../../types";
 
 function transformPaymentMethods(methods: string[]) {
   if (methods.length > 0) {
