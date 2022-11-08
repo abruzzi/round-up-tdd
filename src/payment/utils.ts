@@ -1,4 +1,5 @@
 import { CountryCode } from "./types";
+import {PaymentStrategy} from "./useRoundUp";
 
 const currencyMap = {
   JP: "¥",
@@ -11,15 +12,15 @@ const getCurrencySign = (countryCode: CountryCode) => currencyMap[countryCode];
 export function formatCheckboxLabel(
   agreeToDonate: boolean,
   tip: number,
-  countryCode: CountryCode
+  strategy: PaymentStrategy
 ) {
-  const currencySign = getCurrencySign(countryCode);
+  const currencySign = strategy.getCurrencySign();
   return agreeToDonate
     ? "Thanks for your donation."
     : `I would like to donate ${currencySign}${tip} to charity.`;
 }
 
-export function formatButtonLabel(total: number, countryCode: CountryCode = "AU") {
-  const currencySign = getCurrencySign(countryCode);
+export function formatButtonLabel(total: number, strategy: PaymentStrategy) {
+  const currencySign = strategy.getCurrencySign();
   return `${currencySign}${total}`;
 }
