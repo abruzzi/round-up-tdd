@@ -3,6 +3,7 @@ import { useRoundUp } from "./useRoundUp";
 import "./payment.css";
 import { formatButtonLabel, formatCheckboxLabel } from "./utils";
 import { PaymentMethods } from "./PaymentMethods";
+import {CountryCode} from "./types";
 
 export const Payment = ({
   amount,
@@ -11,7 +12,7 @@ export const Payment = ({
 }: {
   amount: number;
   methods?: string[];
-  countryCode?: string;
+  countryCode?: CountryCode;
 }) => {
   const { agreeToDonate, total, tip, updateAgreeToDonate } = useRoundUp(
     amount,

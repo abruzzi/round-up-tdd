@@ -68,4 +68,16 @@ describe('Payment', () => {
       expect(screen.getByText('¥3500')).toBeInTheDocument();
     })
   });
+
+  describe('Denmark Market', function () {
+    it('shows correct amount when user selected to donate', () => {
+      render(<Payment amount={321} countryCode="DK" />);
+
+      const select = screen.getByText('I would like to donate Kr.9 to charity.');
+      expect(select).toBeInTheDocument();
+
+      fireEvent.click(select);
+      expect(screen.getByText('Kr.330')).toBeInTheDocument();
+    })
+  });
 })
