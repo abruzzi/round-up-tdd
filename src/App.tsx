@@ -1,6 +1,6 @@
 import React from 'react';
 import {OrderDetails} from './order/OrderDetails';
-import {Payment} from "./round-up/Payment";
+import {Payment} from "./payment/Payment";
 
 function App() {
   return (

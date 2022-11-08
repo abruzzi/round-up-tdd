@@ -56,4 +56,16 @@ describe('Payment', () => {
       expect(payInCash).toBeChecked();
     })
   })
+
+  describe('Japan Market', function () {
+    it('shows correct amount when user selected to donate', () => {
+      render(<Payment amount={3459} countryCode="JP" />);
+
+      const select = screen.getByText('I would like to donate ¥41 to charity.');
+      expect(select).toBeInTheDocument();
+
+      fireEvent.click(select);
+      expect(screen.getByText('¥3500')).toBeInTheDocument();
+    })
+  });
 })
