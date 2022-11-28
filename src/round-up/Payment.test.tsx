@@ -7,7 +7,7 @@ describe('Payment', () => {
     expect(screen.getByText('Payment')).toBeInTheDocument();
   })
 
-  it.skip('shows me the option of donate', () => {
+  it('shows me the option of donate', () => {
     render(<Payment amount={19.9} />);
     expect(screen.getByText('I would like to donate $0.1 to charity.')).toBeInTheDocument();
   })
@@ -17,7 +17,7 @@ describe('Payment', () => {
     expect(screen.getByText('$19.9')).toBeInTheDocument();
   })
 
-  it.skip('shows thanks when user selected donation', () => {
+  it('shows thanks when user selected donation', () => {
     render(<Payment amount={19.9} />);
 
     const select = screen.getByText('I would like to donate $0.1 to charity.');
@@ -27,7 +27,7 @@ describe('Payment', () => {
     expect(screen.getByText('Thanks for your donation.')).toBeInTheDocument();
   })
 
-  it.skip('shows correct amount when user selected to donate', () => {
+  it('shows correct amount when user selected to donate', () => {
     render(<Payment amount={19.9} />);
 
     const select = screen.getByText('I would like to donate $0.1 to charity.');
