@@ -6,7 +6,7 @@ export const PaymentMethods = ({
                                }: {
   paymentMethods: PaymentMethod[];
 }) => (
-  <Fragment>
+  <div className="paymentMethods">
     {paymentMethods.map((method) => (
       <label key={method.provider}>
         <input
@@ -18,5 +18,5 @@ export const PaymentMethods = ({
         <span>{method.label}</span>
       </label>
     ))}
-  </Fragment>
+  </div>
 );
