@@ -4,7 +4,7 @@ import pen from '../assets/pen.jpg';
 import './orderdetails.css'
 export const OrderDetails = () => {
   return (
-    <div className="container">
+    <div className="container orderContainer">
       <h3>Order Details</h3>
       <ul>
         <li className="flex item">
@@ -13,7 +13,7 @@ export const OrderDetails = () => {
           </div>
           <div>
             <h4>Notebook</h4>
-            <p>Moleskine S04894 Cahier Notebook</p>
+            <p>Good quality notebook, perfect for taking notes.</p>
           </div>
         </li>
         <li className="flex item">
@@ -22,7 +22,7 @@ export const OrderDetails = () => {
           </div>
           <div>
             <h4>Pen</h4>
-            <p>HONGDIAN Matte Black Forest Fountain Pen Extra Fine</p>
+            <p>Beautiful pen for writing on the notebook above.</p>
           </div>
         </li>
       </ul>
