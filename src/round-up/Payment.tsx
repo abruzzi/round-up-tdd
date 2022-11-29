@@ -5,9 +5,33 @@ import { useRoundUp } from "./useRoundUp";
 import { PaymentMethods } from "./PaymentMethods";
 import { DonationCheckbox } from "./DonationCheckbox";
 
-export const Payment = ({ amount }: { amount: number }) => {
-  const { total, tipMessage, agreeToDonate, updateAgreeToDonate } =
-    useRoundUp(amount);
+import { type PaymentStrategy, PaymentStrategyAU } from "./PaymentStrategy";
+
+const formatCheckboxLabel = (
+  agreeToDonate: boolean,
+  tip: number,
+  strategy: PaymentStrategy
+) => {
+  const currencySign = strategy.getCurrencySign();
+  return agreeToDonate
+    ? "Thanks for your donation."
+    : `I would like to donate ${currencySign}${tip} to charity.`;
+};
+
+const formatButtonLabel = (strategy: PaymentStrategy, total: number) =>
+  `${strategy.getCurrencySign()}${total}`;
+
+export const Payment = ({
+  amount,
+  strategy = new PaymentStrategyAU(),
+}: {
+  amount: number;
+  strategy?: PaymentStrategy;
+}) => {
+  const { total, tip, agreeToDonate, updateAgreeToDonate } = useRoundUp(
+    amount,
+    strategy
+  );
   const { paymentMethods } = usePaymentMethods();
 
   return (
@@ -17,9 +41,11 @@ export const Payment = ({ amount }: { amount: number }) => {
       <DonationCheckbox
         onChange={updateAgreeToDonate}
         checked={agreeToDonate}
-        content={tipMessage}
+        content={formatCheckboxLabel(agreeToDonate, tip, strategy)}
       />
-      <button className="paymentButton">${total}</button>
+      <button className="paymentButton">
+        {formatButtonLabel(strategy, total)}
+      </button>
     </div>
   );
 };

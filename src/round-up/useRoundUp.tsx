@@ -1,21 +1,15 @@
 import {useEffect, useState} from "react";
+import {PaymentStrategy} from "./PaymentStrategy";
 
-export const useRoundUp = (amount: number) => {
+export const useRoundUp = (amount: number, strategy: PaymentStrategy) => {
   const [total, setTotal] = useState<number>(amount);
-  const [tipMessage, setTipMessage] = useState<string>("");
+  const [tip, setTip] = useState<number>(0);
   const [agreeToDonate, setAgreeToDonate] = useState<boolean>(false);
 
-  const getTipMessage = (agreeToDonate: boolean, tip: number) => {
-    return agreeToDonate
-      ? "Thanks for your donation."
-      : `I would like to donate $${tip} to charity.`;
-  };
-
   useEffect(() => {
-    setTotal(agreeToDonate ? Math.floor(amount + 1) : amount);
-    const tip = parseFloat((Math.floor(amount + 1) - amount).toPrecision(2));
-    setTipMessage(getTipMessage(agreeToDonate, tip));
-  }, [agreeToDonate, amount]);
+    setTotal(agreeToDonate ? strategy.getRoundUpAmount(amount) : amount);
+    setTip(strategy.getTip(amount));
+  }, [agreeToDonate, amount, strategy]);
 
   const updateAgreeToDonate = () => {
     setAgreeToDonate((agreeToDonate) => !agreeToDonate);
@@ -23,8 +17,9 @@ export const useRoundUp = (amount: number) => {
 
   return {
     total,
-    tipMessage,
+    tip,
     agreeToDonate,
     updateAgreeToDonate,
   };
 };
+

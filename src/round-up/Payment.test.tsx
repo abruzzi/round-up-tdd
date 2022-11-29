@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, waitFor} from "@testing-library/react";
 import {Payment} from "./Payment";
+import {PaymentStrategyJP} from "./PaymentStrategy";
 
 describe('Payment', () => {
   it('renders payment title', () => {
@@ -35,6 +36,18 @@ describe('Payment', () => {
 
     fireEvent.click(select);
     expect(screen.getByText('$20')).toBeInTheDocument();
+  })
+
+  describe('japan market', () => {
+    it('shows correct amount when user selected to donate', () => {
+      render(<Payment amount={3312} strategy={new PaymentStrategyJP()} />);
+
+      const select = screen.getByText('I would like to donate ¥88 to charity.');
+      expect(select).toBeInTheDocument();
+
+      fireEvent.click(select);
+      expect(screen.getByText('¥3400')).toBeInTheDocument();
+    })
   })
 
   describe('payment methods from remote', () => {
