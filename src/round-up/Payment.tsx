@@ -1,12 +1,12 @@
 import "./Payment.css";
 import { usePaymentMethods } from "./usePaymentMethods";
-import { useRoundUp } from "./useRoundUp";
 
 import { PaymentMethods } from "./PaymentMethods";
 import { DonationCheckbox } from "./DonationCheckbox";
 
 import { type PaymentStrategy, PaymentStrategyAU } from "./PaymentStrategy";
 import { formatButtonLabel, formatCheckboxLabel } from "./utils";
+import {useMemo, useState} from "react";
 
 export const Payment = ({
   amount,
@@ -15,11 +15,21 @@ export const Payment = ({
   amount: number;
   strategy?: PaymentStrategy;
 }) => {
-  const { total, tip, agreeToDonate, updateAgreeToDonate } = useRoundUp(
-    amount,
-    strategy
-  );
   const { paymentMethods } = usePaymentMethods();
+
+  const [agreeToDonate, setAgreeToDonate] = useState<boolean>(false);
+
+  const updateAgreeToDonate = () => {
+    setAgreeToDonate((agreeToDonate) => !agreeToDonate);
+  };
+
+  const { total, tip } = useMemo(
+    () => ({
+      total: agreeToDonate ? strategy.getRoundUpAmount(amount) : amount,
+      tip: strategy.getTip(amount),
+    }),
+    [strategy, amount, agreeToDonate]
+  );
 
   return (
     <div className="container">

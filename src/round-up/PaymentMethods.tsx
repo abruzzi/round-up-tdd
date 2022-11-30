@@ -1,9 +1,8 @@
-import {PaymentMethod} from "./PaymentMethod";
-import {Fragment} from "react";
+import { PaymentMethod } from "./PaymentMethod";
 
 export const PaymentMethods = ({
-                                 paymentMethods,
-                               }: {
+  paymentMethods,
+}: {
   paymentMethods: PaymentMethod[];
 }) => (
   <div className="paymentMethods">
