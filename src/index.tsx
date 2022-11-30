@@ -3,27 +3,26 @@ import "./index.css";
 
 import { FetchClient } from "./round-up/FetchClient";
 import type { PaymentMethod } from "./round-up/PaymentMethod";
-import { PaymentStrategy, PaymentStrategyAU } from "./round-up/PaymentStrategy";
+import { PaymentStrategy, PaymentStrategyDK } from "./round-up/PaymentStrategy";
 import { formatButtonLabel, formatCheckboxLabel } from "./round-up/utils";
 
 const renderPaymentMethods = (paymentMethods: PaymentMethod[]) => {
   return $("<div>", { class: "paymentMethods" }).append(
     paymentMethods.map((method) => {
-      const $label = $("<label>");
+      const item = $(`
+        <label>
+          <input type="radio" name="payment">
+          <span></span>
+        </label>
+      `);
 
-      const $input = $("<input>", {
-        name: "payment",
-        type: "radio",
+      item.find("input").attr({
         value: method.provider,
         checked: method.isDefaultMethod,
       });
 
-      const $span = $("<span>").text(method.label);
-
-      $label.append($input);
-      $label.append($span);
-
-      return $label;
+      item.find("span").text(method.label);
+      return item;
     })
   );
 };
@@ -39,28 +38,36 @@ const renderCheckbox = (
   checked: boolean,
   content: string
 ) => {
-  const $input = $("<input>", { type: "checkbox", checked: checked }).on(
-    "change",
-    onChange
-  );
-  const $p = $("<p>", { class: "checkbox-content" }).text(content);
-  const $label = $("<label>").append($input).append($p);
+  const element = $(`
+  <div class="donation">
+    <label>
+       <input type="checkbox">
+       <p class="checkbox-content"></p>
+    </label>
+  </div>
+  `);
 
-  return $("<div>", { class: "donation" }).append($label);
+  element
+    .find("input")
+    .attr({
+      checked: checked,
+    })
+    .on("change", onChange);
+
+  element.find("p.checkbox-content").text(content);
+
+  return element;
 };
 
 $(() => {
-  const paymentContainer = $("<div>", { class: "container" });
-  paymentContainer.appendTo("#root");
-
   const container = $("#root").find(".container");
 
   const url =
     "https://5a2f495fa871f00012678d70.mockapi.io/api/payment-methods?countryCode=AU";
   const client = new FetchClient(url);
 
-  const strategy = new PaymentStrategyAU();
-  const amount = 19.8;
+  const strategy = new PaymentStrategyDK();
+  const amount = 13.8;
   const tip = strategy.getTip(amount);
 
   client.fetch().then((paymentMethods) => {
