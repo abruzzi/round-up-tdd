@@ -15,7 +15,7 @@ export class FetchClient {
     return this.convertPaymentMethods(methods)
   }
 
-  convertPaymentMethods(methods: RemotePaymentMethod[]) {
+  private convertPaymentMethods(methods: RemotePaymentMethod[]) {
     if (methods.length === 0) {
       return [];
     }

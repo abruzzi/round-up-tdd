@@ -6,20 +6,7 @@ import { PaymentMethods } from "./PaymentMethods";
 import { DonationCheckbox } from "./DonationCheckbox";
 
 import { type PaymentStrategy, PaymentStrategyAU } from "./PaymentStrategy";
-
-const formatCheckboxLabel = (
-  agreeToDonate: boolean,
-  tip: number,
-  strategy: PaymentStrategy
-) => {
-  const currencySign = strategy.getCurrencySign();
-  return agreeToDonate
-    ? "Thanks for your donation."
-    : `I would like to donate ${currencySign}${tip} to charity.`;
-};
-
-const formatButtonLabel = (strategy: PaymentStrategy, total: number) =>
-  `${strategy.getCurrencySign()}${total}`;
+import { formatButtonLabel, formatCheckboxLabel } from "./utils";
 
 export const Payment = ({
   amount,

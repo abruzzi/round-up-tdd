@@ -32,3 +32,39 @@ code {
 h3 {
   margin-block: 1rem;
 }
+
+.paymentMethods label {
+  display: block;
+  margin-block: 0.4rem;
+}
+
+.paymentMethods label span {
+  margin-left: 0.4rem;
+}
+
+.paymentMethods {
+  padding-bottom: 1rem;
+  margin: 1rem 0;
+  border-bottom: 1px dashed #c4c4c4;
+}
+
+.paymentButton {
+  font-family: "Gill Sans", "Ubuntu", sans-serif;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 0.1rem;
+  background-color: #e23e57;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.donation {
+  margin-block: 1rem;
+}
+
+.donation label {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
