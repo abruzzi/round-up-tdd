@@ -1,5 +1,5 @@
 import { useMemo, useState} from "react";
-import {PaymentStrategy} from "./PaymentStrategy";
+import {PaymentStrategy} from "../models/PaymentStrategy";
 
 export const useRoundUp = (amount: number, strategy: PaymentStrategy) => {
   const [agreeToDonate, setAgreeToDonate] = useState<boolean>(false);

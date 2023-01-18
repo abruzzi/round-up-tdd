@@ -1,25 +1,36 @@
 import { fireEvent, render, screen, waitFor} from "@testing-library/react";
 import {Payment} from "./Payment";
-import {PaymentStrategyJP} from "./PaymentStrategy";
+import {roundUpToNearestHundred} from "../utils";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import React from "react";
+import {PaymentStrategyImpl} from "../models/PaymentStrategyImpl";
+
+const queryClient = new QueryClient();
+
+const myRender = (ui: React.ReactElement) => {
+  return render(<QueryClientProvider client={queryClient}>
+    {ui}
+  </QueryClientProvider>)
+}
 
 describe('Payment', () => {
   it('renders payment title', () => {
-    render(<Payment amount={0.0} />);
-    expect(screen.getByText('Payment')).toBeInTheDocument();
+    myRender(<Payment amount={0.0} />);
+    expect(screen.getByText('Payment section')).toBeInTheDocument();
   })
 
   it('shows me the option of donate', () => {
-    render(<Payment amount={19.9} />);
+    myRender(<Payment amount={19.9} />);
     expect(screen.getByText('I would like to donate $0.1 to charity.')).toBeInTheDocument();
   })
 
   it('shows me the total amount', () => {
-    render(<Payment amount={19.9} />);
+    myRender(<Payment amount={19.9} />);
     expect(screen.getByText('$19.9')).toBeInTheDocument();
   })
 
   it('shows thanks when user selected donation', () => {
-    render(<Payment amount={19.9} />);
+    myRender(<Payment amount={19.9} />);
 
     const select = screen.getByText('I would like to donate $0.1 to charity.');
     expect(select).toBeInTheDocument();
@@ -29,7 +40,7 @@ describe('Payment', () => {
   })
 
   it('shows correct amount when user selected to donate', () => {
-    render(<Payment amount={19.9} />);
+    myRender(<Payment amount={19.9} />);
 
     const select = screen.getByText('I would like to donate $0.1 to charity.');
     expect(select).toBeInTheDocument();
@@ -40,7 +51,7 @@ describe('Payment', () => {
 
   describe('japan market', () => {
     it('shows correct amount when user selected to donate', () => {
-      render(<Payment amount={3312} strategy={new PaymentStrategyJP()} />);
+      myRender(<Payment amount={3312} strategy={new PaymentStrategyImpl("¥", roundUpToNearestHundred)} />);
 
       const select = screen.getByText('I would like to donate ¥88 to charity.');
       expect(select).toBeInTheDocument();
@@ -62,7 +73,7 @@ describe('Payment', () => {
         json: () => Promise.resolve(methods)
       }));
 
-      render(<Payment amount={19.9}/>)
+      myRender(<Payment amount={19.9}/>)
 
       await waitFor(() => {
         expect(screen.getByText('Pay with apple')).toBeInTheDocument();

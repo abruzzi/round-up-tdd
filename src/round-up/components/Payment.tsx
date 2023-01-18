@@ -1,16 +1,17 @@
 import "./Payment.css";
-import { usePaymentMethods } from "./usePaymentMethods";
+import { usePaymentMethods } from "../hooks/usePaymentMethods";
 
 import { PaymentMethods } from "./PaymentMethods";
 import { DonationCheckbox } from "./DonationCheckbox";
 
-import { type PaymentStrategy, PaymentStrategyAU } from "./PaymentStrategy";
-import { formatButtonLabel, formatCheckboxLabel } from "./utils";
-import { useRoundUp } from "./useRoundUp";
+import { type PaymentStrategy } from "../models/PaymentStrategy";
+import {formatButtonLabel, formatCheckboxLabel, roundUpToNearestInteger} from "../utils";
+import { useRoundUp } from "../hooks/useRoundUp";
+import {PaymentStrategyImpl} from "../models/PaymentStrategyImpl";
 
 export const Payment = ({
   amount,
-  strategy = new PaymentStrategyAU(),
+  strategy = new PaymentStrategyImpl("$", roundUpToNearestInteger),
 }: {
   amount: number;
   strategy?: PaymentStrategy;

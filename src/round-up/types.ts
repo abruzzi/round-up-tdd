@@ -1,0 +1,1 @@
+export type RoundUpAlgorithm = (number: number) => number;

@@ -1,10 +1,6 @@
-import { FetchClient } from "./FetchClient";
+import { fetchPaymentMethods } from "../fetch-payment-methods";
 
 import { useQuery } from "@tanstack/react-query";
-
-const url =
-  "https://5a2f495fa871f00012678d70.mockapi.io/api/payment-methods?countryCode=AU";
-const client = new FetchClient(url);
 
 export const usePaymentMethods = () => {
   const {
@@ -13,7 +9,7 @@ export const usePaymentMethods = () => {
     status,
   } = useQuery({
     queryKey: ["paymentMethods"],
-    queryFn: () => client.fetch(),
+    queryFn: fetchPaymentMethods,
   });
 
   return {
